@@ -6,16 +6,25 @@
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
-import nvdiffrast
 import setuptools
 import os
+import re
+
+# Read version from __init__.py without importing
+def get_version():
+    with open(os.path.join("nvdiffrast", "__init__.py"), "r") as f:
+        content = f.read()
+        match = re.search(r"__version__\s*=\s*['\"]([^'\"]+)['\"]", content)
+        if match:
+            return match.group(1)
+        raise RuntimeError("Unable to find version string.")
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="nvdiffrast",
-    version=nvdiffrast.__version__,
+    version=get_version(),
     author="Samuli Laine",
     author_email="slaine@nvidia.com",
     description="nvdiffrast - modular primitives for high-performance differentiable rendering",
