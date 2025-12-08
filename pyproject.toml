@@ -8,6 +8,7 @@ authors = [
     { name = "Samuli Laine", email = "slaine@nvidia.com" }
 ]
 dependencies = [
+    "ninja>=1.13.0",
     "numpy",
 ]
 
